@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Search Results | FAQ</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@400;600&display=swap');
     body {
@@ -118,11 +119,10 @@
       <div x-show="searchTriggered && searchQuery && searchResults.length > 0" x-transition.opacity.duration.200ms class="text-lg text-[#3B434B] mb-6">
         Search Results for "<span x-text="searchQuery"></span>"
       </div>
-      <form x-on:submit.prevent="performSearch" x-init="if (searchQuery) performSearch()" x-on:keyup.enter="performSearch" class="items-center flex-center">
+      <form x-on:submit.prevent="performSearch" x-init="if (searchQuery) performSearch()" @keydown.enter.prevent="performSearch" class="items-center flex-center">
         <div class="flex items-center bg-[#D0EDEF] rounded-full shadow-sm border border-[#83B8C6] overflow-hidden max-w-[300px] w-full mx-auto">
           <input autocomplete="off" x-model="searchTextInput" type="text" id="searchText" placeholder="Search"
-            class="text-sm text-center w-[100px] px-3 py-2 bg-transparent focus:outline-none w-full"
-            x-on:keyup.enter="performSearch">
+            class="text-sm text-center w-[100px] px-3 py-2 bg-transparent focus:outline-none w-full">
           <button type="submit" x-on:click="performSearch" class="p-3 bg-[#F3D17C] hover:bg-[#E0C06F] transition-all flex-shrink-0 flex items-center justify-center">
             <img src="/assets/search_icon.jpg" alt="Search" class="w-5 h-5" onerror="this.style.display='none'; this.parentElement.classList.add('bg-red-500');">
           </button>
@@ -137,7 +137,7 @@
                   <span x-text="openForms.includes(index) ? '-' : '+'"></span>
                 </span>
               </div>
-              <div :class="openForms.includes(index) ? '' : 'hidden'" class="search-result-body whitespace-pre-line break-words px-6 py-4 text-[0.95rem] leading-relaxed bg-[#E8D4A2] text-[#1A2526] border-t-2 border-[#E16F2F] rounded-3xl shadow-md mt-[-2px]" x-html="result.body"></div>
+              <div :class="openForms.includes(index) ? '' : 'hidden'" class="search-result-body whitespace-pre-line break-words px-6 py-4 text-[0.95rem] leading-relaxed bg-[#E8D4A2] text-[#1A2526] border-2 border-[#E16F2F] rounded-3xl shadow-md mt-[-2px]" x-html="result.body"></div>
             </div>
           </template>
           <div x-show="searchTriggered && searchResults.length === 0 && searchQuery" class="mt-6 text-[#3B434B]">
@@ -164,9 +164,5 @@
         </a>
       </div>
     </footer>
-  <script src="//unpkg.com/alpinejs" defer></script>
-  <script>
-    // Remove unused toggleSearchResult function as Alpine handles toggling
-  </script>
 </body>
 </html>

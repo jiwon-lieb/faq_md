@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Customer Support | FAQ</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
     body {
@@ -78,10 +80,11 @@
       <h1 class="text-4xl font-extrabold text-[#3B434B] mb-6 mt-4">
         How can I help you?
       </h1>
-      <form x-data="{ 
+      <form x-init="console.log('gsg');" x-data="{ 
         searchQuery: '',
         searchResults: '',
-        performSearch: async function() {
+        performSearch: async function(e) {
+          e.preventDefault();
           const query = this.searchQuery.trim().toLowerCase();
           this.searchResults = '';
           if (!query) {
@@ -112,11 +115,11 @@
             this.searchResults = `❌ An error occurred while retrieving data`;
           }
         }
-      }" x-on:submit.prevent="performSearch" class="w-full max-w-lg text-center">
+      }" @submit.prevent="performSearch" class="w-full max-w-lg text-center">
         <div class="ml-6 flex items-center bg-[#D0EDEF] rounded-full shadow-sm border border-[#83B8C6] overflow-hidden">
           <input autocomplete="off" x-model="searchQuery" type="text" id="searchQuery" placeholder="Search"
             class="text-sm text-center min-w-0 px-3 py-2 bg-transparent focus:outline-none w-full">
-          <button type="submit" x-on:click="performSearch" class="p-3 bg-[#F3D17C] hover:bg-[#E0C06F] transition-all flex-shrink-0">
+          <button class="p-3 bg-[#F3D17C] hover:bg-[#E0C06F] transition-all flex-shrink-0">
             <img src="/assets/search_icon.jpg" alt="Search" class="w-5 h-5">
           </button>
         </div>
@@ -153,6 +156,5 @@
       </div>
     </footer>
   </div>
-  <script src="//unpkg.com/alpinejs" defer></script>
 </body>
 </html>
