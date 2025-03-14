@@ -1,0 +1,16 @@
+# FAQ Summary
+## Maintained by: Jiwon
+## Last Updated: 2025-03-14
+
+| File Name       | Category     | Title                                    | Author  | Created Date |
+|----------------|-------------|-----------------------------------------|---------|--------------|
+| faq_1.md | Marine Animals | How do dolphins communicate? | Jiwon | 2025-03-14 |
+| faq_11.md | Marine Animals | Do jellyfish have brains? | Jiwon | 2025-03-14 |
+| faq_5.md | Marine Animals | Do octopuses have three hearts? | Jiwon | 2025-03-14 |
+| faq_10.md | Mammals | How fast can a cheetah run? | Jiwon | 2025-03-14 |
+| faq_3.md | Mammals | Why do cats purr? | Jiwon | 2025-03-14 |
+| faq_6.md | Mammals | Can elephants recognize themselves in a mirror? | Jiwon | 2025-03-14 |
+| faq_4.md | Reptiles | How do chameleons change color? | Jiwon | 2025-03-14 |
+| faq_9.md | Reptiles | Can turtles breathe through their butts? | Jiwon | 2025-03-14 |
+| faq_7.md | Insects | How do bees make honey? | Jiwon | 2025-03-14 |
+| faq_8.md | Birds | Why do penguins waddle? | Jiwon | 2025-03-14 |

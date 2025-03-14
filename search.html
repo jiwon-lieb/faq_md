@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Results | FAQ</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@400;600&display=swap');
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(to bottom, rgba(246, 202, 202, 0.3), rgba(208, 237, 239, 0.5)), url('/assets/background.jpeg') no-repeat center center fixed;
+      background-size: cover;
+      /* display: flex; */
+      /* justify-content: center; */
+      min-height: 100vh;
+      /* overflow-y: hidden; */
+      /* position: relative; */
+    }
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 24px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 30px;
+      transition: all 0.3s ease-in-out;
+    }
+    .btn-primary {
+      background: #F3D17C;
+      color: #1A2526;
+    }
+    .btn-primary:hover {
+      background: #E0C06F;
+      transform: translateY(-2px);
+    }
+    .btn-primary:active {
+      background: #A9CDD7;
+    }
+    footer {
+      position: relative;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      color: #1A2526;
+      padding: 15px 0;
+    }
+    footer a {
+      color: #1A2526;
+      margin: 0 10px;
+      transition: 0.3s ease-in-out;
+    }
+    footer a:hover {
+      color: #A9E4DE;
+    }
+    /* Ensure FAQ items don’t exceed container width */
+    .search-item {
+      width: 100%;
+      max-width: 100%;
+    }
+  </style>
+</head>
+<body>
+    <header class="absolute top-6 left-12">
+      <a href="/">
+        <img src="/assets/logo.png" alt="Logo" class="h-7">
+      </a>
+    </header>
+<div class="flex flex-col justify-center items-center">
+    <div x-data="{
+      openForms: [],
+      searchTextInput: new URLSearchParams(window.location.search).get('query') || '',
+      searchQuery: new URLSearchParams(window.location.search).get('query') || '',
+      searchResults: [],
+      searchTriggered: false, /* New flag to track search initiation */
+      performSearch: async function() {
+        this.searchTriggered = true; /* Set flag when search is triggered */
+        const query = this.searchTextInput.trim().toLowerCase();
+        this.searchQuery = query;
+
+        if (!query) {
+          return;
+        }
+
+        const url = new URL(window.location.href);
+        url.searchParams.set('query', query);
+        window.history.replaceState({}, '', url); 
+
+        try {
+          const response = await fetch('/faq.json');
+          if (!response.ok) throw new Error('Network response was not ok');
+          const faqData = await response.json();
+          let matches = [];
+          faqData.forEach(category => {
+            category.faqs.forEach(faq => {
+              if (
+                faq.title.toLowerCase().includes(query) || 
+                faq.body.toLowerCase().includes(query)
+              ) {
+                matches.push({ category: category.category, title: faq.title, body: faq.body });
+              }
+            });
+          });
+          this.searchResults = matches;
+          console.log('Search results:', matches);
+        } catch (error) {
+          console.error('Error fetching FAQs:', error);
+          this.searchResults = [];
+        }
+      }
+    }" class="main-container flex flex-col text-center p-10 bg-gradient-to-br from-[#A9E4DE] via-[#D0EDEF] to-[#F7E4A9] shadow-xl rounded-2xl border-2 border-[#83B8C6] w-[800px] mt-[120px] mb-[70px] ">
+      <img src="/assets/logo.png" alt="Black Logo" class="h-6 mb-4 mx-auto">
+      <h1 class="text-4xl font-extrabold text-[#3B434B] mb-2 mt-4">
+        Search Results
+      </h1>
+      <div x-show="searchTriggered && searchQuery && searchResults.length > 0" x-transition.opacity.duration.200ms class="text-lg text-[#3B434B] mb-6">
+        Search Results for "<span x-text="searchQuery"></span>"
+      </div>
+      <form x-on:submit.prevent="performSearch" x-init="if (searchQuery) performSearch()" x-on:keyup.enter="performSearch" class="items-center flex-center">
+        <div class="flex items-center bg-[#D0EDEF] rounded-full shadow-sm border border-[#83B8C6] overflow-hidden max-w-[300px] w-full mx-auto">
+          <input autocomplete="off" x-model="searchTextInput" type="text" id="searchText" placeholder="Search"
+            class="text-sm text-center w-[100px] px-3 py-2 bg-transparent focus:outline-none w-full"
+            x-on:keyup.enter="performSearch">
+          <button type="submit" x-on:click="performSearch" class="p-3 bg-[#F3D17C] hover:bg-[#E0C06F] transition-all flex-shrink-0 flex items-center justify-center">
+            <img src="/assets/search_icon.jpg" alt="Search" class="w-5 h-5" onerror="this.style.display='none'; this.parentElement.classList.add('bg-red-500');">
+          </button>
+        </div>
+        <div class="search-results w-full mt-6 flex flex-col gap-2">
+          <template x-for="(result, index) in searchResults" :key="result.title" :key="index">
+            <div class="search-item text-left">
+              <div class="search-result-title text-[1rem] font-semibold px-6 py-4 flex justify-between items-center rounded-3xl shadow-md bg-[#D0EDEF] text-[#1A2526] border-2 border-[#83B8C6] transition-all duration-300 ease-in-out hover:bg-[#A9E4DE] hover:shadow-lg">
+                <span class="break-words flex-1 pr-2" x-text="result.title"></span>
+                <span class="text-sm text-[#3B434B] italic mr-2" x-text="result.category"></span>
+                <span x-on:click="openForms.includes(index) ? openForms = openForms.filter(item => item !== index) : openForms.push(index)" class="text-xl text-[#3B434B] w-6 h-6 flex items-center justify-center bg-[#F3D17C] rounded-full cursor-pointer">
+                  <span x-text="openForms.includes(index) ? '-' : '+'"></span>
+                </span>
+              </div>
+              <div :class="openForms.includes(index) ? '' : 'hidden'" class="search-result-body whitespace-pre-line break-words px-6 py-4 text-[0.95rem] leading-relaxed bg-[#E8D4A2] text-[#1A2526] border-t-2 border-[#E16F2F] rounded-3xl shadow-md mt-[-2px]" x-html="result.body"></div>
+            </div>
+          </template>
+          <div x-show="searchTriggered && searchResults.length === 0 && searchQuery" class="mt-6 text-[#3B434B]">
+            <p>No results found for "<span x-text="searchQuery || 'no query'"></span>".</p>
+            <a href="/faq" class="btn btn-primary mt-4">Back to FAQ</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+    <footer class="bottom-3 left-0 w-full text-center p-4">
+      <p class="text-sm font-bold">
+          Made with ❤️ by Baddie Jiwon
+        </a>
+      </p>
+      <p class="text-sm">
+        <a href="mailto:contact@jiwonkwak.co" class="underline">contact@jiwonkwak.co</a>
+      </p>
+      <div class="mt-2 flex justify-center space-x-6 items-center">
+        <a href="https://jiwonkwak.co" target="_blank">Website</a>
+        <a href="https://www.linkedin.com/in/jiwon-kwak/" target="_blank" class="flex items-center space-x-1">
+          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/linkedin.svg" alt="LinkedIn" class="h-5 w-5">
+          <span>LinkedIn</span>
+        </a>
+      </div>
+    </footer>
+  <script src="//unpkg.com/alpinejs" defer></script>
+  <script>
+    // Remove unused toggleSearchResult function as Alpine handles toggling
+  </script>
+</body>
+</html>

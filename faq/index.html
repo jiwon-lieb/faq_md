@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ | 고객지원</title>
+  <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: url('/assets/background.jpeg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 0;
+      justify-content: center;
+      overflow-y: auto;
+      position: relative;
+    }
+    .faq-category.active {
+      background-color: #83B8C6;
+      color: #F3E9D2;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+    /* Rest of your styles unchanged */
+  </style>
+</head>
+<body>
+  <header role="banner" class="absolute top-6 left-12">
+    <a href="/"><img src="/assets/logo.png" alt="Rebellions Logo" class="h-7"></a>
+  </header>
+
+  <div class="faq-container flex flex-row justify-between w-full max-w-[1000px] mt-[120px] mb-[100px] flex-grow p-5 bg-gradient-to-br from-[#A9E4DE] via-[#D0EDEF] to-[#F7E4A9] rounded-xl shadow-xl shadow-[#5A8C9B]/50 border-2 border-[#83B8C6] mt-[120px]">
+    <div class="flex flex-col w-[260px] justify-start mx-[10px] pr-4">
+      <h2 class="text-[1.75rem] font-bold p-[12px] text-center mb-[10px] text-[#3B434B]">FAQ</h2>
+      <div class="flex flex-col gap-2 min-w-[220px] h-full overflow-y-auto pr-2" id="faq-categories"></div>
+    </div>
+    <div class="flex flex-col flex-grow pl-[25px] gap-[15px] border-l-2 border-[#808A96] overflow-y-auto h-full" id="faq-content">
+      <div class="text-m font-semibold text-[#3B434B] flex items-center whitespace-nowrap my-[10px] mb-[9px] p-[9px]" id="faq-search">
+        <p>Didn't find what you were looking for? Contact me <a href="mailto:contact@jiwonkwak.co" class="text-gray-800 hover:text-gray-600 underline">here</a>!</p>
+        <div class="ml-6 flex items-center bg-[#D0EDEF] rounded-full shadow-sm border border-[#83B8C6] overflow-hidden">
+          <input type="text" placeholder="Search" class="text-sm text-center min-w-20 px-3 py-2 bg-transparent focus:outline-none" id="faqSearchInput" onkeypress="handleKeyPress(event)">
+          <button class="p-2 bg-[#F3D17C] hover:bg-[#E0C06F] transition-all flex-shrink-0" onclick="performSearch()">
+            <img src="/assets/search_icon.jpg" alt="Search" class="w-5 h-5">
+          </button>
+        </div>
+      </div>
+      <div id="faq-items" class="flex flex-col gap-2"></div>
+    </div>
+  </div>
+
+  <footer role="contentinfo" class="left-0 w-full text-center text-white p-4">
+    <!-- Footer content unchanged -->
+  </footer>
+
+  <script>
+    async function loadFAQs() {
+      try {
+        const response = await fetch("/faq.json");
+        if (!response.ok) throw new Error("Failed to load faq.json");
+        const categories = await response.json();
+        const categoryContainer = document.getElementById("faq-categories");
+        const faqItemsContainer = document.getElementById("faq-items");
+
+        categoryContainer.innerHTML = "";
+        faqItemsContainer.innerHTML = `<p class="text-gray-500 text-sm">Choose a category.</p>`;
+
+        if (categories.length === 0) {
+          categoryContainer.innerHTML = "<p class='text-gray-500'>No FAQs.</p>";
+          return;
+        }
+
+        categories.forEach((category, index) => {
+          const categoryDiv = document.createElement("div");
+          categoryDiv.className =
+            "faq-category flex items-center justify-center px-4 py-4 text-lg font-semibold bg-[#F3D17C] text-[#1A2526] rounded-full transition-all cursor-pointer hover:bg-[#E0C06F] hover:text-[#1A2526] hover:border-[#3B434B] hover:shadow-lg active:bg-[#A9CDD7] active:text-[#F3E9D2] active:shadow-lg";
+          categoryDiv.innerText = category.category;
+          categoryDiv.onclick = () => showFAQ(category.category, category.faqs);
+          categoryContainer.appendChild(categoryDiv);
+
+          if (index === 0) {
+            categoryDiv.classList.add("active");
+            showFAQ(category.category, category.faqs);
+          }
+        });
+      } catch (error) {
+        console.error("Error loading FAQs:", error);
+        document.getElementById("faq-categories").innerHTML =
+          "<p class='text-red-500'>An error occurred while retrieving data.</p>";
+      }
+    }
+
+    function showFAQ(categoryName, faqs) {
+      const faqItemsContainer = document.getElementById("faq-items");
+      faqItemsContainer.innerHTML = "";
+
+      document.querySelectorAll(".faq-category").forEach(cat => {
+        cat.classList.remove("active");
+        if (cat.innerText === categoryName) cat.classList.add("active");
+      });
+
+      if (faqs.length === 0) {
+        faqItemsContainer.innerHTML = "<p class='text-gray-500'>No FAQs available.</p>";
+        return;
+      }
+
+      faqs.forEach(faq => {
+        const faqItem = document.createElement("div");
+        faqItem.classList.add("faq-item");
+        faqItem.innerHTML = `
+          <article>
+            <div class="faq-question text-[1rem] font-semibold px-6 py-4 cursor-pointer flex justify-between items-center rounded-3xl shadow-md bg-[#D0EDEF] text-[#1A2526] border-2 border-[#83B8C6] transition-all duration-300 ease-in-out hover:bg-[#A9E4DE] hover:shadow-lg" onclick="toggleFaq(this)">
+              <span class="break-words flex-1 pr-2">${faq.title}</span>
+              <button class="toggle-btn text-xl text-[#3B434B] w-6 h-6 flex items-center justify-center bg-[#F3D17C] rounded-full ml-2">+</button>
+            </div>
+            <div class="faq-answer hidden whitespace-pre-line break-words px-6 py-4 text-[0.95rem] leading-relaxed bg-[#E8D4A2] text-[#1A2526] border-t-2 border-[#E16F2F] rounded-3xl mt-[-2px]">
+              ${faq.body}
+            </div>
+          </article>
+        `;
+        faqItemsContainer.appendChild(faqItem);
+      });
+    }
+
+    function toggleFaq(questionElement) {
+      const answerElement = questionElement.nextElementSibling;
+      const toggleButton = questionElement.querySelector(".toggle-btn");
+      const isHidden = answerElement.classList.contains("hidden");
+
+      answerElement.classList.toggle("hidden", !isHidden);
+      toggleButton.innerText = isHidden ? "−" : "+";
+    }
+
+    window.onload = loadFAQs;
+
+    function performSearch() {
+      const query = document.getElementById("faqSearchInput").value.trim();
+      if (query === "") {
+        alert("Enter a search word!");
+        return;
+      }
+      console.log("Redirecting to /search.html with query:", query);
+      window.location.href = `/search.html?query=${encodeURIComponent(query)}`;
+    }
+
+    function handleKeyPress(event) {
+      if (event.key === "Enter") performSearch();
+    }
+  </script>
+</body>
+</html>
