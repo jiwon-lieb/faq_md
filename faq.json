@@ -12,7 +12,7 @@
         ],
         "body": "Dolphins communicate using a variety of sounds, including whistles, clicks, and body language. They also use echolocation to navigate and find prey by emitting sound waves and interpreting the returning echoes.",
         "author": "Jiwon",
-        "createdDate": "2025-03-14",
+        "createdDate": "2025-03-15",
         "fileName": "faq_1.md"
       },
       {
@@ -25,7 +25,7 @@
         ],
         "body": "No, jellyfish do not have brains. Instead, they have a <strong>nerve net</strong>—a decentralized system that allows them to detect stimuli and move accordingly. Despite lacking a brain, some jellyfish species can exhibit surprisingly complex behaviors.",
         "author": "Jiwon",
-        "createdDate": "2025-03-14",
+        "createdDate": "2025-03-15",
         "fileName": "faq_11.md"
       },
       {
@@ -38,7 +38,7 @@
         ],
         "body": "Yes! Octopuses have <strong>three hearts</strong>. Two pump blood to the gills, while the third circulates it to the rest of the body. Interestingly, the main heart stops beating when an octopus swims, which is why they prefer crawling to conserve energy.",
         "author": "Jiwon",
-        "createdDate": "2025-03-14",
+        "createdDate": "2025-03-15",
         "fileName": "faq_5.md"
       }
     ]
@@ -56,7 +56,7 @@
         ],
         "body": "Cheetahs are the <strong>fastest land animals</strong>, reaching speeds of up to <strong>75 mph (120 km/h)</strong> in short bursts. They use their <strong>long tails</strong> for balance and can accelerate from <strong>0 to 60 mph in just 3 seconds</strong>.",
         "author": "Jiwon",
-        "createdDate": "2025-03-14",
+        "createdDate": "2025-03-15",
         "fileName": "faq_10.md"
       },
       {
@@ -69,7 +69,7 @@
         ],
         "body": "Cats purr for various reasons, including relaxation, communication with their owners, and even self-healing. Studies suggest that the vibrations produced during purring can promote bone healing and reduce stress.",
         "author": "Jiwon",
-        "createdDate": "2025-03-14",
+        "createdDate": "2025-03-15",
         "fileName": "faq_3.md"
       },
       {
@@ -82,7 +82,7 @@
         ],
         "body": "Yes! Elephants have demonstrated <strong>self-awareness</strong> by recognizing themselves in mirrors. This ability is rare in the animal kingdom and suggests a high level of intelligence, comparable to dolphins and great apes.",
         "author": "Jiwon",
-        "createdDate": "2025-03-14",
+        "createdDate": "2025-03-15",
         "fileName": "faq_6.md"
       }
     ]
@@ -100,7 +100,7 @@
         ],
         "body": "Chameleons change color by adjusting specialized skin cells called chromatophores and iridophores. These cells contain different pigments that reflect light, allowing chameleons to blend into their surroundings or communicate emotions.",
         "author": "Jiwon",
-        "createdDate": "2025-03-14",
+        "createdDate": "2025-03-15",
         "fileName": "faq_4.md"
       },
       {
@@ -113,7 +113,7 @@
         ],
         "body": "Yes! Some turtles, like the Australian <strong>Fitzroy River turtle</strong>, can absorb oxygen through their <strong>cloaca</strong> (a multi-purpose opening near their tail). This allows them to stay underwater for long periods without coming up for air.",
         "author": "Jiwon",
-        "createdDate": "2025-03-14",
+        "createdDate": "2025-03-15",
         "fileName": "faq_9.md"
       }
     ]
@@ -131,7 +131,7 @@
         ],
         "body": "Bees collect nectar from flowers and store it in their honey stomach. Once back at the hive, they pass the nectar to worker bees, who break down the sugars and remove moisture by fanning their wings. The final product is honey, which is stored in hexagonal wax cells.",
         "author": "Jiwon",
-        "createdDate": "2025-03-14",
+        "createdDate": "2025-03-15",
         "fileName": "faq_7.md"
       }
     ]
@@ -139,6 +139,19 @@
   {
     "category": "Birds",
     "faqs": [
+      {
+        "title": "Why do flamingos stand on one leg?",
+        "slug": "why-do-flamingos-stand-on-one-leg?",
+        "tags": [
+          "flamingos",
+          "balance",
+          "thermoregulation"
+        ],
+        "body": "Flamingos often stand on one leg to conserve body heat and reduce muscle fatigue. Scientists believe this posture helps minimize heat loss when wading in cold water. Additionally, their unique anatomy allows them to balance effortlessly with minimal energy, even while sleeping.",
+        "author": "Jiwon",
+        "createdDate": "2025-03-15",
+        "fileName": "faq_12.md"
+      },
       {
         "title": "Why do penguins waddle?",
         "slug": "why-do-penguins-waddle?",
@@ -149,7 +162,7 @@
         ],
         "body": "Penguins waddle because of their <strong>short legs and upright posture</strong>. This movement helps conserve energy while walking on land. Scientists have found that waddling is actually an efficient way for penguins to move, despite its awkward appearance.",
         "author": "Jiwon",
-        "createdDate": "2025-03-14",
+        "createdDate": "2025-03-15",
         "fileName": "faq_8.md"
       }
     ]

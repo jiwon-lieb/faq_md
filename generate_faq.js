@@ -122,16 +122,36 @@ let markdownContent = `# FAQ Summary
 |----------------|-------------|-----------------------------------------|---------|--------------|
 `;
 
+// Flatten all FAQs into a single array for sorting
+let allFaqs = [];
 faqCategories.forEach(category => {
     category.faqs.forEach(faq => {
-        markdownContent += `| ${faq.fileName} | ${category.category} | ${faq.title} | ${faq.author} | ${faq.createdDate} |\n`;
+        allFaqs.push({
+            fileName: faq.fileName,
+            category: category.category,
+            title: faq.title,
+            author: faq.author,
+            createdDate: faq.createdDate
+        });
     });
+});
+
+// **Sort by file number, extracting numeric parts and sorting in ascending order**
+allFaqs.sort((a, b) => {
+    let numA = parseInt(a.fileName.match(/\d+/)?.[0] || "0", 10);
+    let numB = parseInt(b.fileName.match(/\d+/)?.[0] || "0", 10);
+    return numA - numB; // Sorting in ascending order (most recent at the bottom)
+});
+
+// Append sorted FAQs to markdown content
+allFaqs.forEach(faq => {
+    markdownContent += `| ${faq.fileName} | ${faq.category} | ${faq.title} | ${faq.author} | ${faq.createdDate} |\n`;
 });
 
 // **STEP 5: Write to faq-summary.txt**
 try {
     fs.writeFileSync(faqTxtPath, markdownContent, "utf8");
-    console.log("🎉 성공이에요! FAQ 요약 파일이 업데이트되었습니다!");
+    console.log("Awesomesss! FAQ is up to date!");
 } catch (error) {
     console.error("❌ Error writing `faq-summary.txt`:", error);
 }
