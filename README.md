@@ -3,12 +3,12 @@
 A lightweight, scalable, and customizable FAQ system built with Eleventy and Tailwind CSS, designed to help teams manage frequently asked questions efficiently.
 
 ## Features
-	•	**Markdown-based** FAQ management – Easily add, edit, or remove FAQs in `.md` format.
-	•	**Automated category sorting** – No manual updates; categories and entries auto-adjust dynamically.
-	•	**Search functionality** – Instant, client-side search powered by Alpine.js.
-	•	**Eleventy-powered static site generation** – Fast, lightweight, and easy to deploy.
-	•	**Tailwind CSS for stylin**g – Fully customizable design with minimal effort.
-	•	**Framework-agnostic** – No backend required; deploy as a static site anywhere.
+- **Markdown-based** FAQ management – Easily add, edit, or remove FAQs in `.md` format.
+- **Automated category sorting** – No manual updates; categories and entries auto-adjust dynamically.
+- **Search functionality** – Instant, client-side search powered by Alpine.js.
+- **Eleventy-powered static site generation** – Fast, lightweight, and easy to deploy.
+- **Tailwind CSS for stylin**g – Fully customizable design with minimal effort.
+- **Framework-agnostic** – No backend required; deploy as a static site anywhere.
 
 ## Installation
 
