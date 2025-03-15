@@ -91,6 +91,19 @@
     "category": "Reptiles",
     "faqs": [
       {
+        "title": "Can geckos regrow their tails?",
+        "slug": "can-geckos-regrow-their-tails?",
+        "tags": [
+          "geckos",
+          "regeneration",
+          "tail loss"
+        ],
+        "body": "Yes! When threatened, geckos can detach their tails as a defense mechanism to distract predators. Over time, they regrow their tails, but the new tail is often structurally different, lacking the same bone structure as the original. This survival tactic helps geckos escape danger and regenerate lost appendages.",
+        "author": "Jiwon",
+        "createdDate": "2025-03-15",
+        "fileName": "faq_13.md"
+      },
+      {
         "title": "How do chameleons change color?",
         "slug": "how-do-chameleons-change-color?",
         "tags": [
@@ -121,6 +134,19 @@
   {
     "category": "Insects",
     "faqs": [
+      {
+        "title": "Can dragonflies see in slow motion?",
+        "slug": "can-dragonflies-see-in-slow-motion?",
+        "tags": [
+          "dragonflies",
+          "vision",
+          "slow motion"
+        ],
+        "body": "Yes! Dragonflies have some of the fastest vision in the animal kingdom. Their eyes contain up to <strong>30,000 lenses</strong>, allowing them to detect movement at an incredibly high frame rate. This makes the world appear in slow motion to them, giving them unmatched precision when hunting prey mid-air.",
+        "author": "Jiwon",
+        "createdDate": "2025-03-15",
+        "fileName": "faq_14.md"
+      },
       {
         "title": "How do bees make honey?",
         "slug": "how-do-bees-make-honey?",

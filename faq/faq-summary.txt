@@ -15,3 +15,5 @@
 | faq_10.md | Mammals | How fast can a cheetah run? | Jiwon | 2025-03-15 |
 | faq_11.md | Marine Animals | Do jellyfish have brains? | Jiwon | 2025-03-15 |
 | faq_12.md | Birds | Why do flamingos stand on one leg? | Jiwon | 2025-03-15 |
+| faq_13.md | Reptiles | Can geckos regrow their tails? | Jiwon | 2025-03-15 |
+| faq_14.md | Insects | Can dragonflies see in slow motion? | Jiwon | 2025-03-15 |
